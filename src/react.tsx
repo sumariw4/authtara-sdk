@@ -8,11 +8,11 @@
  * - SSR support untuk Next.js
  */
 
-'use client';
+"use client";
 
-import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
-import { AuthClient, type AuthResult, type User, type SignUpData, type SignInData } from './index';
-import type { AuthError } from './errors';
+import React, { createContext, useContext, useEffect, useState, useCallback } from "react";
+import { AuthClient, type AuthResult, type User, type SignUpData, type SignInData } from "./index";
+import type { AuthError } from "./errors";
 
 export interface AuthProviderProps {
   client: AuthClient;
@@ -86,17 +86,17 @@ export function AuthProvider({ client, children, initialUser = null }: AuthProvi
       setError(err);
     };
 
-    client.on('signIn', handleSignIn);
-    client.on('signOut', handleSignOut);
-    client.on('userChanged', handleUserChanged);
-    client.on('error', handleError);
+    client.on("signIn", handleSignIn as (...args: unknown[]) => void);
+    client.on("signOut", handleSignOut as (...args: unknown[]) => void);
+    client.on("userChanged", handleUserChanged as (...args: unknown[]) => void);
+    client.on("error", handleError as (...args: unknown[]) => void);
 
     return () => {
       mounted = false;
-      client.off('signIn', handleSignIn);
-      client.off('signOut', handleSignOut);
-      client.off('userChanged', handleUserChanged);
-      client.off('error', handleError);
+      client.off("signIn", handleSignIn as (...args: unknown[]) => void);
+      client.off("signOut", handleSignOut as (...args: unknown[]) => void);
+      client.off("userChanged", handleUserChanged as (...args: unknown[]) => void);
+      client.off("error", handleError as (...args: unknown[]) => void);
     };
   }, [client]);
 
@@ -116,7 +116,7 @@ export function AuthProvider({ client, children, initialUser = null }: AuthProvi
         setIsLoading(false);
       }
     },
-    [client],
+    [client]
   );
 
   const signIn = useCallback(
@@ -135,7 +135,7 @@ export function AuthProvider({ client, children, initialUser = null }: AuthProvi
         setIsLoading(false);
       }
     },
-    [client],
+    [client]
   );
 
   const signOut = useCallback(async (): Promise<void> => {
@@ -194,7 +194,7 @@ export function AuthProvider({ client, children, initialUser = null }: AuthProvi
 export function useAuth(): AuthContextValue {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 }
@@ -242,8 +242,8 @@ export interface SignInProps {
 
 export function SignIn({ onSuccess, onError, className }: SignInProps) {
   const { signIn, isLoading, error } = useSignIn();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [formError, setFormError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -255,7 +255,7 @@ export function SignIn({ onSuccess, onError, className }: SignInProps) {
       onSuccess?.(result);
     } catch (err) {
       const authError = err as AuthError;
-      setFormError(authError.message || 'Sign in failed');
+      setFormError(authError.message || "Sign in failed");
       onError?.(authError);
     }
   };
@@ -264,64 +264,76 @@ export function SignIn({ onSuccess, onError, className }: SignInProps) {
 
   return (
     <form onSubmit={handleSubmit} className={className}>
-      {displayError && (
-        <div style={{ color: '#c33', marginBottom: '12px', fontSize: '14px' }}>{displayError}</div>
-      )}
-      <div style={{ marginBottom: '16px' }}>
-        <label style={{ display: 'block', marginBottom: '6px', fontSize: '14px', fontWeight: 500 }}>
+      {displayError && <div style={{ color: "#c33", marginBottom: "12px", fontSize: "14px" }}>{displayError}</div>}
+      <div style={{ marginBottom: "16px" }}>
+        <label
+          style={{
+            display: "block",
+            marginBottom: "6px",
+            fontSize: "14px",
+            fontWeight: 500,
+          }}
+        >
           Email
         </label>
         <input
-          type='email'
+          type="email"
           value={email}
-          onChange={e => setEmail((e.target as HTMLInputElement).value)}
+          onChange={(e) => setEmail((e.target as HTMLInputElement).value)}
           required
           disabled={isLoading}
           style={{
-            width: '100%',
-            padding: '12px',
-            border: '1px solid #ddd',
-            borderRadius: '4px',
-            fontSize: '14px',
+            width: "100%",
+            padding: "12px",
+            border: "1px solid #ddd",
+            borderRadius: "4px",
+            fontSize: "14px",
           }}
         />
       </div>
-      <div style={{ marginBottom: '16px' }}>
-        <label style={{ display: 'block', marginBottom: '6px', fontSize: '14px', fontWeight: 500 }}>
+      <div style={{ marginBottom: "16px" }}>
+        <label
+          style={{
+            display: "block",
+            marginBottom: "6px",
+            fontSize: "14px",
+            fontWeight: 500,
+          }}
+        >
           Password
         </label>
         <input
-          type='password'
+          type="password"
           value={password}
-          onChange={e => setPassword((e.target as HTMLInputElement).value)}
+          onChange={(e) => setPassword((e.target as HTMLInputElement).value)}
           required
           disabled={isLoading}
           style={{
-            width: '100%',
-            padding: '12px',
-            border: '1px solid #ddd',
-            borderRadius: '4px',
-            fontSize: '14px',
+            width: "100%",
+            padding: "12px",
+            border: "1px solid #ddd",
+            borderRadius: "4px",
+            fontSize: "14px",
           }}
         />
       </div>
       <button
-        type='submit'
+        type="submit"
         disabled={isLoading}
         style={{
-          width: '100%',
-          padding: '12px',
-          background: '#007bff',
-          color: '#fff',
-          border: 'none',
-          borderRadius: '4px',
-          fontSize: '16px',
+          width: "100%",
+          padding: "12px",
+          background: "#007bff",
+          color: "#fff",
+          border: "none",
+          borderRadius: "4px",
+          fontSize: "16px",
           fontWeight: 600,
-          cursor: isLoading ? 'not-allowed' : 'pointer',
+          cursor: isLoading ? "not-allowed" : "pointer",
           opacity: isLoading ? 0.5 : 1,
         }}
       >
-        {isLoading ? 'Signing in...' : 'Sign In'}
+        {isLoading ? "Signing in..." : "Sign In"}
       </button>
     </form>
   );
@@ -338,9 +350,9 @@ export interface SignUpProps {
 
 export function SignUp({ onSuccess, onError, className }: SignUpProps) {
   const { signUp, isLoading, error } = useSignUp();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [formError, setFormError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -352,7 +364,7 @@ export function SignUp({ onSuccess, onError, className }: SignUpProps) {
       onSuccess?.(result);
     } catch (err) {
       const authError = err as AuthError;
-      setFormError(authError.message || 'Sign up failed');
+      setFormError(authError.message || "Sign up failed");
       onError?.(authError);
     }
   };
@@ -361,84 +373,103 @@ export function SignUp({ onSuccess, onError, className }: SignUpProps) {
 
   return (
     <form onSubmit={handleSubmit} className={className}>
-      {displayError && (
-        <div style={{ color: '#c33', marginBottom: '12px', fontSize: '14px' }}>{displayError}</div>
-      )}
-      <div style={{ marginBottom: '16px' }}>
-        <label style={{ display: 'block', marginBottom: '6px', fontSize: '14px', fontWeight: 500 }}>
+      {displayError && <div style={{ color: "#c33", marginBottom: "12px", fontSize: "14px" }}>{displayError}</div>}
+      <div style={{ marginBottom: "16px" }}>
+        <label
+          style={{
+            display: "block",
+            marginBottom: "6px",
+            fontSize: "14px",
+            fontWeight: 500,
+          }}
+        >
           Name
         </label>
         <input
-          type='text'
+          type="text"
           value={name}
-          onChange={e => setName(e.target.value)}
+          onChange={(e) => setName(e.target.value)}
           required
           disabled={isLoading}
           style={{
-            width: '100%',
-            padding: '12px',
-            border: '1px solid #ddd',
-            borderRadius: '4px',
-            fontSize: '14px',
+            width: "100%",
+            padding: "12px",
+            border: "1px solid #ddd",
+            borderRadius: "4px",
+            fontSize: "14px",
           }}
         />
       </div>
-      <div style={{ marginBottom: '16px' }}>
-        <label style={{ display: 'block', marginBottom: '6px', fontSize: '14px', fontWeight: 500 }}>
+      <div style={{ marginBottom: "16px" }}>
+        <label
+          style={{
+            display: "block",
+            marginBottom: "6px",
+            fontSize: "14px",
+            fontWeight: 500,
+          }}
+        >
           Email
         </label>
         <input
-          type='email'
+          type="email"
           value={email}
-          onChange={e => setEmail((e.target as HTMLInputElement).value)}
+          onChange={(e) => setEmail((e.target as HTMLInputElement).value)}
           required
           disabled={isLoading}
           style={{
-            width: '100%',
-            padding: '12px',
-            border: '1px solid #ddd',
-            borderRadius: '4px',
-            fontSize: '14px',
+            width: "100%",
+            padding: "12px",
+            border: "1px solid #ddd",
+            borderRadius: "4px",
+            fontSize: "14px",
           }}
         />
       </div>
-      <div style={{ marginBottom: '16px' }}>
-        <label style={{ display: 'block', marginBottom: '6px', fontSize: '14px', fontWeight: 500 }}>
+      <div style={{ marginBottom: "16px" }}>
+        <label
+          style={{
+            display: "block",
+            marginBottom: "6px",
+            fontSize: "14px",
+            fontWeight: 500,
+          }}
+        >
           Password
         </label>
         <input
-          type='password'
+          type="password"
           value={password}
-          onChange={e => setPassword((e.target as HTMLInputElement).value)}
+          onChange={(e) => setPassword((e.target as HTMLInputElement).value)}
           required
           minLength={8}
           disabled={isLoading}
           style={{
-            width: '100%',
-            padding: '12px',
-            border: '1px solid #ddd',
-            borderRadius: '4px',
-            fontSize: '14px',
+            width: "100%",
+            padding: "12px",
+            border: "1px solid #ddd",
+            borderRadius: "4px",
+            fontSize: "14px",
           }}
         />
       </div>
       <button
-        type='submit'
+        type="submit"
         disabled={isLoading}
         style={{
-          width: '100%',
-          padding: '12px',
-          background: '#007bff',
-          color: '#fff',
-          border: 'none',
-          borderRadius: '4px',
-          fontSize: '16px',
+          width: "100%",
+          padding: "12px",
+          background: "#007bff",
+          color: "#fff",
+          border: "none",
+          borderRadius: "4px",
+          fontSize: "16px",
           fontWeight: 600,
-          cursor: isLoading ? 'not-allowed' : 'pointer',
+          cursor: isLoading ? "not-allowed" : "pointer",
           opacity: isLoading ? 0.5 : 1,
         }}
       >
-        {isLoading ? 'Signing up...' : 'Sign Up'}
+        {isLoading ? "Signing up..." : "Sign Up"}
       </button>
     </form>
   );
@@ -464,7 +495,7 @@ export function UserButton({ onSignOut, className }: UserButtonProps) {
       await signOut();
       onSignOut?.();
     } catch (error) {
-      console.error('Sign out failed:', error);
+      console.error("Sign out failed:", error);
     }
   };
 
@@ -472,33 +503,33 @@ export function UserButton({ onSignOut, className }: UserButtonProps) {
     <div
       className={className}
       style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '12px',
-        padding: '12px',
-        background: '#f5f5f5',
-        borderRadius: '8px',
+        display: "flex",
+        alignItems: "center",
+        gap: "12px",
+        padding: "12px",
+        background: "#f5f5f5",
+        borderRadius: "8px",
       }}
     >
       <div style={{ flex: 1 }}>
-        <div style={{ fontSize: '14px', fontWeight: 600 }}>{user.name || user.email}</div>
-        <div style={{ fontSize: '12px', color: '#666' }}>{user.email}</div>
+        <div style={{ fontSize: "14px", fontWeight: 600 }}>{user.name || user.email}</div>
+        <div style={{ fontSize: "12px", color: "#666" }}>{user.email}</div>
       </div>
       <button
         onClick={handleSignOut}
         disabled={isLoading}
         style={{
-          padding: '8px 16px',
-          background: '#dc3545',
-          color: '#fff',
-          border: 'none',
-          borderRadius: '4px',
-          fontSize: '14px',
-          cursor: isLoading ? 'not-allowed' : 'pointer',
+          padding: "8px 16px",
+          background: "#dc3545",
+          color: "#fff",
+          border: "none",
+          borderRadius: "4px",
+          fontSize: "14px",
+          cursor: isLoading ? "not-allowed" : "pointer",
           opacity: isLoading ? 0.5 : 1,
         }}
       >
-        {isLoading ? '...' : 'Sign Out'}
+        {isLoading ? "..." : "Sign Out"}
       </button>
     </div>
   );

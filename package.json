@@ -26,7 +26,8 @@
     "build": "tsc",
     "prepublishOnly": "bun run build",
     "test": "bun test",
-    "lint": "eslint src/**/*.ts",
+    "lint": "eslint src/**/*.ts src/**/*.tsx",
+    "lint:fix": "eslint src/**/*.ts src/**/*.tsx --fix",
     "type-check": "tsc --noEmit"
   },
   "keywords": [
@@ -55,6 +56,12 @@
   "devDependencies": {
     "@types/node": "^20.0.0",
     "@types/react": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "prettier": "^3.2.5",
     "typescript": "^5.0.0"
   },
   "peerDependencies": {

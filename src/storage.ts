@@ -31,13 +31,13 @@ export class StorageManager {
   private storage: TokenStorage;
   private prefix: string;
 
-  constructor(storage?: TokenStorage, prefix = 'auth_sdk_') {
+  constructor(storage?: TokenStorage, prefix = "auth_sdk_") {
     // Default ke localStorage jika available, fallback ke memory storage
     if (storage) {
       this.storage = storage;
     } else if (
-      typeof globalThis !== 'undefined' &&
-      'localStorage' in globalThis &&
+      typeof globalThis !== "undefined" &&
+      "localStorage" in globalThis &&
       globalThis.localStorage
     ) {
       this.storage = globalThis.localStorage as TokenStorage;
@@ -65,7 +65,7 @@ export class StorageManager {
       this.storage.setItem(this.getKey(key), value);
     } catch (_error) {
       // Storage might be full or disabled
-      console.warn('Failed to set storage item');
+      console.warn("Failed to set storage item");
     }
   }
 
@@ -80,8 +80,8 @@ export class StorageManager {
   clear(): void {
     // Clear all items with our prefix
     if (
-      typeof globalThis !== 'undefined' &&
-      'localStorage' in globalThis &&
+      typeof globalThis !== "undefined" &&
+      "localStorage" in globalThis &&
       this.storage === globalThis.localStorage
     ) {
       const localStorage = globalThis.localStorage as TokenStorage;
@@ -94,7 +94,7 @@ export class StorageManager {
           }
         }
       }
-      keys.forEach(key => localStorage.removeItem(key));
+      keys.forEach((key) => localStorage.removeItem(key));
     }
   }
 }
