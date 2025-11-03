@@ -1,0 +1,71 @@
+{
+  "name": "@authtara/sdk",
+  "version": "1.0.0",
+  "description": "Authentication SDK for Identity Provider as a Service (IdPaaS) - JavaScript & React SDK",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./react": {
+      "import": "./dist/react.js",
+      "require": "./dist/react.js",
+      "types": "./dist/react.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "bun run build",
+    "test": "bun test",
+    "lint": "eslint src/**/*.ts",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "authentication",
+    "auth",
+    "sdk",
+    "identity",
+    "oauth",
+    "react",
+    "typescript",
+    "idpaas",
+    "widget",
+    "authtara"
+  ],
+  "author": "SaaS Platform Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/saas-backend.git",
+    "directory": "saas-authtara-sdk"
+  },
+  "homepage": "https://github.com/your-org/saas-backend#readme",
+  "bugs": {
+    "url": "https://github.com/your-org/saas-backend/issues"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "typescript": "^5.0.0"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0 || >=17.0.0 || >=18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": false
+    }
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

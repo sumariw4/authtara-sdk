@@ -1,0 +1,47 @@
+# Source files
+src/
+*.ts
+*.tsx
+
+# Development files
+node_modules/
+*.log
+.DS_Store
+.vscode/
+.idea/
+
+# Build artifacts (kecuali dist/)
+*.tsbuildinfo
+
+# Test files
+**/*.test.ts
+**/*.test.tsx
+**/__tests__/
+**/__tests__/**
+test/
+tests/
+
+# Config files
+.eslintrc*
+.prettierrc*
+tsconfig.json
+bunfig.toml
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Documentation (opsional, bisa di-include jika ingin)
+# docs/
+
+# Environment
+.env
+.env.*
+
+# Lock files (npm akan generate sendiri)
+bun.lock
+bun.lockb
+package-lock.json
+yarn.lock
+
