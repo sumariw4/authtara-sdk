@@ -45,12 +45,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-org/saas-backend.git",
-    "directory": "saas-authtara-sdk"
+    "url": "https://github.com/sumariw4/authtara-sdk.git",
+    "directory": "authtara-sdk"
   },
-  "homepage": "https://github.com/your-org/saas-backend#readme",
+  "homepage": "https://github.com/sumariw4/authtara-sdk#readme",
   "bugs": {
-    "url": "https://github.com/your-org/saas-backend/issues"
+    "url": "https://github.com/sumariw4/authtara-sdk/issues"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
