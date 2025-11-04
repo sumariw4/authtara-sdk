@@ -24,6 +24,7 @@
   ],
   "scripts": {
     "build": "tsc",
+    "dev:watch": "tsc --watch",
     "prepublishOnly": "bun run build",
     "test": "bun test",
     "lint": "eslint src/**/*.ts src/**/*.tsx",
