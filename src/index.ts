@@ -255,6 +255,32 @@ export class AuthClient {
   }
 
   /**
+   * Initiate OAuth sign in flow
+   * Redirects to OAuth provider (Google or GitHub) for authentication
+   */
+  signInWithOAuth(provider: 'google' | 'github'): void {
+    if (typeof globalThis === 'undefined' || !('window' in globalThis)) {
+      throw new Error('OAuth sign in is only available in browser environment');
+    }
+
+    // Validate provider
+    if (provider !== 'google' && provider !== 'github') {
+      throw new Error('Invalid OAuth provider. Supported providers: google, github');
+    }
+
+    // Construct OAuth URL
+    // Widget OAuth endpoint: /widget/api/oauth/:provider
+    // This endpoint requires X-Client-ID header, but we can also pass client_id as query param for easier redirect
+    const baseUrl = this.apiUrl.replace('/api', '');
+    const oauthUrl = `${baseUrl}/api/oauth/${provider}`;
+
+    // Redirect to OAuth provider
+    // Note: X-Client-ID header will be set by browser automatically if using fetch,
+    // but for redirect we'll use query parameter as fallback
+    window.location.href = `${oauthUrl}?client_id=${encodeURIComponent(this.clientId)}`;
+  }
+
+  /**
    * Event listener management
    */
   on(

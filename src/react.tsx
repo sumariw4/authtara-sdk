@@ -476,6 +476,48 @@ export function SignUp({ onSuccess, onError, className }: SignUpProps) {
 }
 
 /**
+ * OAuth Sign In Button Component - Pre-built OAuth button
+ */
+export interface OAuthButtonProps {
+  provider: "google" | "github";
+  className?: string;
+  children?: React.ReactNode;
+}
+
+export function OAuthButton({ provider, className, children }: OAuthButtonProps) {
+  const { client } = useAuth();
+
+  const handleClick = () => {
+    client.signInWithOAuth(provider);
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={handleClick}
+      className={className}
+      style={{
+        width: "100%",
+        padding: "12px",
+        background: "#fff",
+        color: "#333",
+        border: "1px solid #ddd",
+        borderRadius: "4px",
+        fontSize: "14px",
+        fontWeight: 500,
+        cursor: "pointer",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "8px",
+      }}
+    >
+      {children || `Sign in with ${provider.charAt(0).toUpperCase() + provider.slice(1)}`}
+    </button>
+  );
+}
+
+/**
  * UserButton Component - Display user info dan sign out button
  */
 export interface UserButtonProps {
