@@ -2,7 +2,7 @@
  * TypeScript Types untuk Auth SDK
  */
 
-import type { TokenStorage } from "./storage";
+import type { TokenStorage } from './storage';
 
 export interface AuthClientOptions {
   clientId: string;
@@ -59,9 +59,5 @@ export interface AuthClientEvents {
   signIn: (user: User) => void;
   signOut: () => void;
   userChanged: (user: User | null) => void;
-  error: (error: {
-    message: string;
-    code?: string;
-    statusCode?: number;
-  }) => void;
+  error: (error: { message: string; code?: string; statusCode?: number }) => void;
 }

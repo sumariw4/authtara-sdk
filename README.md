@@ -112,6 +112,96 @@ function LoginPage() {
 - `<SignUp>` - Pre-built sign up form
 - `<UserButton>` - User info & sign out button
 
+## 🛠️ Development
+
+### Local Development Setup
+
+SDK ini menggunakan Bun workspaces untuk development yang lebih efisien. Tidak perlu publish ke npm untuk testing perubahan lokal.
+
+#### Prerequisites
+
+- Bun >= 1.0.0
+- TypeScript >= 5.0.0
+
+#### Development Workflow
+
+1. **Build SDK**:
+   ```bash
+   bun run build
+   ```
+
+2. **Watch mode** (auto-rebuild saat perubahan):
+   ```bash
+   bun run dev:watch
+   ```
+
+3. **Type checking**:
+   ```bash
+   bun run type-check
+   ```
+
+4. **Linting**:
+   ```bash
+   bun run lint
+   bun run lint:fix  # Auto-fix issues
+   ```
+
+#### Menggunakan di Project Lain (Workspace)
+
+Untuk menggunakan SDK ini di project lain dalam workspace yang sama:
+
+1. Pastikan workspace sudah dikonfigurasi di root `package.json`:
+   ```json
+   {
+     "workspaces": [
+       "authtara-sdk",
+       "your-app"
+     ]
+   }
+   ```
+
+2. Di project lain, gunakan workspace dependency:
+   ```json
+   {
+     "dependencies": {
+       "@authtara/sdk": "workspace:*"
+     }
+   }
+   ```
+
+3. Build SDK dan jalankan watch mode:
+   ```bash
+   # Terminal 1: Watch SDK
+   cd authtara-sdk
+   bun run dev:watch
+   
+   # Terminal 2: Run your app
+   cd your-app
+   bun run dev
+   ```
+
+#### Publish ke NPM
+
+Untuk publish ke npm registry:
+
+1. Pastikan semua perubahan sudah di-build:
+   ```bash
+   bun run build
+   ```
+
+2. Update version di `package.json` jika perlu:
+   ```bash
+   # Manual atau menggunakan npm version
+   npm version patch|minor|major
+   ```
+
+3. Publish:
+   ```bash
+   npm publish
+   ```
+
+   Script `prepublishOnly` akan otomatis menjalankan build sebelum publish.
+
 ## 📖 Documentation
 
 Full documentation available at: [Your Docs URL]
