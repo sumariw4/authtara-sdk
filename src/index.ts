@@ -26,8 +26,8 @@ export class AuthClient {
       throw new Error('clientId is required');
     }
 
-    if (!options.clientId.startsWith('app_')) {
-      throw new Error('clientId must start with "app_"');
+    if (!options.clientId.startsWith('pk_')) {
+      throw new Error('clientId must start with "pk_"');
     }
 
     this.clientId = options.clientId;
