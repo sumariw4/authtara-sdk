@@ -1,7 +1,7 @@
 {
   "name": "@authtara/sdk",
-  "version": "1.0.1",
-  "description": "Authentication SDK for Identity Provider as a Service (IdPaaS) - JavaScript & React SDK",
+  "version": "1.0.3",
+  "description": "Authentication SDK for Identity Provider as a Service (Authtara) - JavaScript & React SDK",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -41,7 +41,7 @@
     "oauth",
     "react",
     "typescript",
-    "idpaas",
+    "authtara",
     "widget",
     "authtara"
   ],

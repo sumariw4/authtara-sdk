@@ -1,6 +1,6 @@
 # @authtara/sdk
 
-JavaScript & React SDK untuk Authentication dengan Identity Provider as a Service (IdPaaS).
+JavaScript & React SDK untuk Authentication dengan Identity Provider as a Service (Authtara).
 
 ## 📦 Installation
 
@@ -21,7 +21,7 @@ import { AuthClient } from '@authtara/sdk';
 
 // Initialize client
 const auth = new AuthClient({
-  clientId: 'app_abc123', // Required: Application client ID
+  clientId: 'pk_abc123', // Required: Application client ID
   apiUrl: 'https://api.yourdomain.com/widget/api', // Optional: Default '/widget/api'
 });
 
@@ -53,7 +53,7 @@ import { AuthClient } from '@authtara/sdk';
 
 // Initialize client
 const authClient = new AuthClient({
-  clientId: 'app_abc123',
+  clientId: 'pk_abc123',
   apiUrl: 'https://api.yourdomain.com/widget/api',
 });
 
@@ -74,7 +74,7 @@ function LoginPage() {
     return <div>Welcome, {user?.name}!</div>;
   }
 
-  return <SignIn onSuccess={(result) => console.log('Signed in!', result)} />;
+  return <SignIn onSuccess={result => console.log('Signed in!', result)} />;
 }
 ```
 
@@ -126,16 +126,19 @@ SDK ini menggunakan Bun workspaces untuk development yang lebih efisien. Tidak p
 #### Development Workflow
 
 1. **Build SDK**:
+
    ```bash
    bun run build
    ```
 
 2. **Watch mode** (auto-rebuild saat perubahan):
+
    ```bash
    bun run dev:watch
    ```
 
 3. **Type checking**:
+
    ```bash
    bun run type-check
    ```
@@ -151,16 +154,15 @@ SDK ini menggunakan Bun workspaces untuk development yang lebih efisien. Tidak p
 Untuk menggunakan SDK ini di project lain dalam workspace yang sama:
 
 1. Pastikan workspace sudah dikonfigurasi di root `package.json`:
+
    ```json
    {
-     "workspaces": [
-       "authtara-sdk",
-       "your-app"
-     ]
+     "workspaces": ["authtara-sdk", "your-app"]
    }
    ```
 
 2. Di project lain, gunakan workspace dependency:
+
    ```json
    {
      "dependencies": {
@@ -170,11 +172,12 @@ Untuk menggunakan SDK ini di project lain dalam workspace yang sama:
    ```
 
 3. Build SDK dan jalankan watch mode:
+
    ```bash
    # Terminal 1: Watch SDK
    cd authtara-sdk
    bun run dev:watch
-   
+
    # Terminal 2: Run your app
    cd your-app
    bun run dev
@@ -185,17 +188,20 @@ Untuk menggunakan SDK ini di project lain dalam workspace yang sama:
 Untuk publish ke npm registry:
 
 1. Pastikan semua perubahan sudah di-build:
+
    ```bash
    bun run build
    ```
 
 2. Update version di `package.json` jika perlu:
+
    ```bash
    # Manual atau menggunakan npm version
    npm version patch|minor|major
    ```
 
 3. Publish:
+
    ```bash
    npm publish
    ```
@@ -218,4 +224,3 @@ MIT
 
 - [Repository](https://github.com/your-org/saas-backend)
 - [Issues](https://github.com/your-org/saas-backend/issues)
-
