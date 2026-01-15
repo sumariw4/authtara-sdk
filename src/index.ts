@@ -389,5 +389,18 @@ export type {
 export * from './errors';
 export * from './storage';
 
+// Export server-side Authtara class
+export { Authtara, AuthtaraError, InvalidTokenError, ApiError, ConfigurationError } from './server';
+export type {
+  AuthtaraConfig,
+  SessionVerifyResult,
+  ExchangeResult,
+  LoginUrlOptions,
+  CheckEntitlementParams,
+  EntitlementResult,
+  RecordUsageParams,
+  RecordUsageResult,
+} from './server';
+
 // Export default
 export default AuthClient;

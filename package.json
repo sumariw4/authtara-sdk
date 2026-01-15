@@ -1,6 +1,6 @@
 {
   "name": "@authtara/sdk",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Authentication SDK for Identity Provider as a Service (Authtara) - JavaScript & React SDK",
   "main": "dist/index.js",
   "module": "dist/index.js",
